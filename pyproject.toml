@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "netsleuth"
+version = "0.1.0"
+description = "Network forensics and threat analysis platform for PCAP/PCAPNG captures"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn>=0.27",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "httpx>=0.27",
+]
+
+[project.scripts]
+netsleuth = "netsleuth.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["netsleuth*"]
+
+[tool.setuptools.package-data]
+netsleuth = ["web/**/*", "samples/*.pcap", "samples/*.pcapng"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
